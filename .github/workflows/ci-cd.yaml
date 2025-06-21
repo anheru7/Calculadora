@@ -16,7 +16,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          # Necesario para que el workflow pueda hacer un push de vuelta al repositorio
+          
           token: ${{ secrets.GH_PAT }} 
 
       - name: Get current date for Docker tag
@@ -46,18 +46,13 @@ jobs:
 
       - name: Update Helm chart with new image tag
         run: |
-          # Navega al directorio del Helm chart
+          
           cd helm/calculadora-salarial/
 
-          # Actualiza el valor de la imagen en values.yaml usando sed
-          # Asegúrate de que tu values.yaml tenga la estructura:
-          # image:
-          #   repository: tu-usuario-docker/calculadora-salarial-ms
-          #   tag: "latest"
+          
           sed -i "s|tag: \"[^\"]*\"|tag: \"${{ steps.date.outputs.DATE }}\"|" values.yaml
 
-          # Puedes descomentar la siguiente línea si también quieres actualizar el repositorio,
-          # pero generalmente el `repository` ya es fijo.
+
           # sed -i "s|repository: [^\"]*|repository: ${{ secrets.DOCKER_USERNAME }}/calculadora-salarial-ms|" values.yaml
 
           git config user.name "GitHub Actions Bot"
