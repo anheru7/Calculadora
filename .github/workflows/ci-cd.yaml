@@ -1,0 +1,74 @@
+name: Build, Push & Update Helm Chart
+
+on:
+  push:
+    branches:
+      - main 
+    paths:
+      - 'Calculadora-Salarial/**' 
+      - 'helm/calculadora-salarial/values.yaml' 
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest 
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          # Necesario para que el workflow pueda hacer un push de vuelta al repositorio
+          token: ${{ secrets.GH_PAT }} 
+
+      - name: Get current date for Docker tag
+        id: date
+        run: echo "DATE=$(date +'%Y%m%d%H%M%S')" >> $GITHUB_OUTPUT 
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: Calculadora-Salarial/ 
+          file: Calculadora-Salarial/Dockerfile 
+          push: true
+          tags: |
+            ${{ secrets.DOCKER_USERNAME }}/calculadora-salarial-ms:${{ steps.date.outputs.DATE }} # Tu repo Docker y el tag de fecha
+            ${{ secrets.DOCKER_USERNAME }}/calculadora-salarial-ms:latest # También etiqueta como latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Update Helm chart with new image tag
+        run: |
+          # Navega al directorio del Helm chart
+          cd helm/calculadora-salarial/
+
+          # Actualiza el valor de la imagen en values.yaml usando sed
+          # Asegúrate de que tu values.yaml tenga la estructura:
+          # image:
+          #   repository: tu-usuario-docker/calculadora-salarial-ms
+          #   tag: "latest"
+          sed -i "s|tag: \"[^\"]*\"|tag: \"${{ steps.date.outputs.DATE }}\"|" values.yaml
+
+          # Puedes descomentar la siguiente línea si también quieres actualizar el repositorio,
+          # pero generalmente el `repository` ya es fijo.
+          # sed -i "s|repository: [^\"]*|repository: ${{ secrets.DOCKER_USERNAME }}/calculadora-salarial-ms|" values.yaml
+
+          git config user.name "GitHub Actions Bot"
+          git config user.email "actions@github.com"
+
+          # Verifica si hay cambios antes de hacer commit
+          git add values.yaml
+          if ! git diff-index --quiet HEAD; then
+            echo "Changes detected in values.yaml, committing and pushing..."
+            git commit -m "chore(ci): Update calculadora-salarial image to ${{ steps.date.outputs.DATE }}"
+            git push
+          else
+            echo "No changes in values.yaml, skipping commit and push."
+          fi
