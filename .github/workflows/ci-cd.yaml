@@ -1,4 +1,4 @@
-name: Build, Push & Update Helm Chart
+name: Despliegue Continuo Calculadora Salarial
 
 on:
   push:
