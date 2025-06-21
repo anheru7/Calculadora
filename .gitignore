@@ -1,0 +1,30 @@
+# Ignorar directorios de Node.js
+node_modules/
+
+# Ignorar directorios de Java/Maven/Gradle
+target/
+.gradle/
+build/
+*.jar
+*.war
+
+# Ignorar entornos virtuales de Python
+.venv/
+venv/
+__pycache__/
+
+# Ignorar archivos Docker generados
+*.log
+*.swp
+
+# Ignorar archivos de configuración específicos del IDE (ej. VS Code)
+.vscode/
+
+# Ignorar archivos de macOS
+.DS_Store
+
+# Archivos de credenciales o secretos (¡nunca subas secretos!)
+*.env
+.env.local
+*.pem
+*.key

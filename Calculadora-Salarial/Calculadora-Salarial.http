@@ -1,0 +1,6 @@
+@Calculadora_Salarial_HostAddress = http://localhost:5018
+
+GET {{Calculadora_Salarial_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
