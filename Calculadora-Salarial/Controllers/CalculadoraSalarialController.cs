@@ -31,7 +31,7 @@ namespace CalculadoraSalarial.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Error interno do servidor: {ex.Message}");
+                return StatusCode(500, $"Internal Server Error: {ex.Message}");
             }
         }
     }
