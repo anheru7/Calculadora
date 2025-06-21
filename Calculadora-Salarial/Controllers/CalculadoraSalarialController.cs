@@ -36,4 +36,3 @@ namespace CalculadoraSalarial.Controllers
         }
     }
 }
-// This code defines a simple ASP.NET Core controller for calculating the net salary based on a given gross salary.
