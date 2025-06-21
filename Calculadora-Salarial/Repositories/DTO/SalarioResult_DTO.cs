@@ -7,7 +7,7 @@ public class SalarioResult_DTO
     public int SalarioBruto { get; set; }
 
     /// <summary>
-    /// Salario liquido calculado
+    /// Salario calculado
     /// </summary>
     public decimal SalarioLiquido { get; set; }
 
