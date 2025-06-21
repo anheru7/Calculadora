@@ -1,0 +1,5 @@
+apiVersion: v2
+name: calculadora-salarial
+description: Un Helm chart para desplegar el microservicio Calculadora Salarial
+version: 0.1.0
+appVersion: "1.0.0"
