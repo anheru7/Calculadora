@@ -23,7 +23,7 @@ namespace CalculadoraSalarial.Controllers
             {
                 if (salarioBruto <= 0)
                 {
-                    return BadRequest("Salário bruto inválido.");
+                    return BadRequest("El valor del salario no es válido");
                 }
 
                 var salarioLiquido = _calculadora.CalcularSalarioLiquido(salarioBruto);
