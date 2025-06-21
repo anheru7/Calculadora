@@ -44,7 +44,7 @@ namespace CalculadoraSalarial.Repositories.Logic
             }
             catch (Exception ex)
             {
-                throw new InvalidOperationException("Error al calcular el salario líquido.", ex);
+                throw new InvalidOperationException("Error al calcular el salario.", ex);
             }
         }
     }
