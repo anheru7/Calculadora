@@ -15,9 +15,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          
-          token: ${{ secrets.GH_PAT }} 
+        #with:
+          #token: ${{ secrets.GH_PAT }} *cuando el repo es privado
 
       - name: Get current date for Docker tag
         id: date
