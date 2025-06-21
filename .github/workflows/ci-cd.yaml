@@ -38,8 +38,8 @@ jobs:
           file: Calculadora-Salarial/Dockerfile 
           push: true
           tags: |
-            ${{ secrets.DOCKER_USERNAME }}/calculadora-salarial-ms:${{ steps.date.outputs.DATE }} # Tu repo Docker y el tag de fecha
-            ${{ secrets.DOCKER_USERNAME }}/calculadora-salarial-ms:latest # También etiqueta como latest
+            ${{ secrets.DOCKER_USERNAME }}/calculadora-salarial-ms:${{ steps.date.outputs.DATE }} 
+            ${{ secrets.DOCKER_USERNAME }}/calculadora-salarial-ms:latest 
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
