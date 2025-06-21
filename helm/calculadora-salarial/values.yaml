@@ -2,7 +2,7 @@ replicaCount: 3
 
 image:
   repository: calculadora-salarial
-  tag: "latest"
+  tag: "20250621225227"
   pullPolicy: Never
 
 service:
