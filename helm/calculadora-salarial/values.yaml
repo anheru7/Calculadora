@@ -2,7 +2,7 @@ replicaCount: 3
 
 image:
   repository: anheru7/calculadora-salarial-ms
-  tag: "20250621235405"
+  tag: "20250622000115"
   pullPolicy: IfNotPresent
 
 service:
