@@ -7,7 +7,7 @@ namespace CalculadoraSalarial.Repositories.Logic
     {
         private const decimal SALARIO_MINIMO = 1423500;
         private const decimal SUBSIDIO_TRANSPORTE = 200000;
-        private const decimal TASA_SALUD = 0.04m;
+        private const decimal TASA_SALUD = 0.08m;
         private const decimal TASA_PENSION = 0.04m;
 
 
